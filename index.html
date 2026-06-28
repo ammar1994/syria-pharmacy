@@ -1,159 +1,36 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>صيدلية الشفاء — Syria Pharmacy</title>
-  <meta name="description" content="صيدليتك الموثوقة — أدوية، مستحضرات، منتجات العناية. توصيل سريع لكل سوريا"/>
-  <link rel="stylesheet" href="style.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة سوريا الطبية الفاخرة | Syria Pharmacy</title>
+    
+    <!-- خطوط جوجل الطبية والملكية -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Amiri:ital,wght@1,700&display=swap" rel="stylesheet">
+    
+    <!-- مكتبة الأيقونات الفاخرة جداً Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <!-- ملف الستايل الخاص بك -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- ===== NAV ===== -->
-<nav>
-  <div class="nav-inner">
-    <div class="logo">
-      <div class="logo-icon">🌿</div>
-      <div>
-        <div class="logo-name">صيدلية الشفاء</div>
-        <div class="logo-sub">Syria Pharmacy</div>
-      </div>
-    </div>
-    <div class="nav-right">
-      <div class="search-pill" onclick="scrollToProducts()">
-        <span>🔍</span><span>ابحث عن دواء...</span>
-      </div>
-      <div class="cart-wrap" onclick="alert('السلة: ' + cart + ' منتج')">
-        <div class="cart-btn">🛒</div>
-        <div class="cart-count" id="cart-count">0</div>
-      </div>
-    </div>
-  </div>
-</nav>
+    <!-- قسم الواجهة الفاخر (Hero Section) مع العبارة التحفيزية البالغة الأناقة -->
+    <section class="hero-luxury-section">
+        <h1 class="motto-text">"لِكُلِّ دَاءٍ دَوَاءٌ.. وَوَرَاءَ كُلِّ شِفَاءٍ صَيْدَلِيٌّ يَهْتَمُّ"</h1>
+        <p class="hero-sub-title">البوابة الرقمية المعتمدة لمستودع سوريا الصيدلاني المتكامل. دقة التوزيع، أمان المصدر، وخبرة صيدلانية رائدة نضعها بين يديكم.</p>
+    </section>
 
-<!-- ===== HERO ===== -->
-<section class="hero">
-  <div class="blob blob1"></div>
-  <div class="blob blob2"></div>
-  <div class="hero-inner">
-    <div>
-      <div class="hero-badge">⭐ الصيدلية الأولى في سوريا</div>
-      <h1>
-        صحتك أولويتنا
-        <span class="green-text">في كل لحظة</span>
-      </h1>
-      <p class="hero-p">أدوية، مستحضرات، منتجات العناية — نوصلها لباب بيتك خلال 15 دقيقة</p>
-      <div class="hero-btns">
-        <button class="btn-main" onclick="scrollToProducts()">
-          تصفح المنتجات 💊
-        </button>
-        <a href="https://wa.me/963XXXXXXXXX" class="btn-outline" style="text-decoration:none">
-          📱 واتساب
-        </a>
-      </div>
-      <div class="checks">
-        <div class="check"><div class="check-icon">✓</div><span>توصيل مجاني +50k ل.س</span></div>
-        <div class="check"><div class="check-icon">✓</div><span>كاش عند الاستلام</span></div>
-        <div class="check"><div class="check-icon">✓</div><span>خدمة 24/7</span></div>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div class="circle-big">
-        <div class="circle-inner">🏥</div>
-        <div class="tag-float tag1">
-          <span style="font-size:20px">💊</span>
-          <div><div class="t-title">أدوية أصلية</div><div class="t-sub">2,000+ صنف</div></div>
-        </div>
-        <div class="tag-float tag2">
-          <span style="font-size:20px">🚀</span>
-          <div><div class="t-title">توصيل سريع</div><div class="t-sub">15 دقيقة</div></div>
-        </div>
-        <div class="tag-float tag3">
-          <span>خصومات تصل 25%</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <svg class="hero-wave" viewBox="0 0 1440 60" preserveAspectRatio="none">
-    <path d="M0,60L1440,60L1440,0C1200,50,840,0,480,40C240,60,80,20,0,0Z" fill="#F0F4F1"/>
-  </svg>
-</section>
+    <!-- هذه الحاوية الديناميكية التي سيقوم ملف app.js بضخ الكروت الطبية داخلها -->
+    <main class="products-luxury-grid" id="luxury-products-container">
+        <!-- المنتجات ستظهر هنا سحرياً وعبر الـ JavaScript -->
+    </main>
 
-<!-- ===== STATS ===== -->
-<section class="stats">
-  <div class="stats-grid">
-    <div class="stat-card"><div class="stat-icon">📦</div><div class="stat-num">2,000+</div><div class="stat-label">منتج أصلي</div></div>
-    <div class="stat-card"><div class="stat-icon">🕐</div><div class="stat-num">24/7</div><div class="stat-label">خدمة متواصلة</div></div>
-    <div class="stat-card"><div class="stat-icon">🚀</div><div class="stat-num">15 دقيقة</div><div class="stat-label">متوسط التوصيل</div></div>
-    <div class="stat-card"><div class="stat-icon">⭐</div><div class="stat-num">10,000+</div><div class="stat-label">عميل سعيد</div></div>
-  </div>
-</section>
-
-<!-- ===== BANNERS ===== -->
-<section class="banners">
-  <div class="banners-grid">
-    <div class="banner" style="background:linear-gradient(135deg,#FF6B35,#D4380D)" onclick="filterCat(document.querySelector('[data-cat=أطفال]'),'أطفال')">
-      <div class="banner-icon">👶</div>
-      <div class="banner-title">بامبرز وأغراض الأطفال</div>
-      <div class="banner-sub">خصم يصل 20%</div>
-      <button class="banner-btn">تسوق الآن ←</button>
-    </div>
-    <div class="banner" style="background:linear-gradient(135deg,#8B5CF6,#5B21B6)" onclick="filterCat(document.querySelector('[data-cat=عناية]'),'عناية')">
-      <div class="banner-icon">✨</div>
-      <div class="banner-title">مستحضرات وعناية</div>
-      <div class="banner-sub">أكبر تشكيلة في سوريا</div>
-      <button class="banner-btn">اكتشفي ←</button>
-    </div>
-  </div>
-</section>
-
-<!-- ===== PRODUCTS ===== -->
-<section class="products-section" id="products-section">
-  <div class="products-inner">
-    <div class="products-head">
-      <div>
-        <div class="products-title">جميع المنتجات</div>
-        <div class="products-count" id="count-label">9 منتج متاح</div>
-      </div>
-      <div class="cats">
-        <button class="cat-btn active" onclick="filterCat(this,'الكل')">الكل</button>
-        <button class="cat-btn" data-cat="أدوية" onclick="filterCat(this,'أدوية')">أدوية</button>
-        <button class="cat-btn" data-cat="عناية" onclick="filterCat(this,'عناية')">عناية</button>
-        <button class="cat-btn" data-cat="أطفال" onclick="filterCat(this,'أطفال')">أطفال</button>
-        <button class="cat-btn" data-cat="أجهزة" onclick="filterCat(this,'أجهزة')">أجهزة</button>
-      </div>
-    </div>
-    <div class="products-grid" id="products-grid"></div>
-  </div>
-</section>
-
-<!-- ===== CTA ===== -->
-<section class="cta">
-  <div class="cta-inner">
-    <div style="font-size:44px">📱</div>
-    <h2>اطلب الآن عبر واتساب</h2>
-    <p>فريقنا جاهز 24/7 — أرسل قائمة أدويتك ونوصلها لبابك</p>
-    <div class="cta-btns">
-      <a href="https://wa.me/963XXXXXXXXX" class="btn-wa" style="text-decoration:none">
-        <span style="font-size:20px">💬</span> واتساب الآن
-      </a>
-      <a href="tel:+963XXXXXXXXX" class="btn-outline" style="text-decoration:none">
-        📞 اتصل بنا
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== FOOTER ===== -->
-<footer>
-  <div class="footer-logo">
-    <div class="footer-icon">🌿</div>
-    <div class="footer-name">صيدلية الشفاء</div>
-  </div>
-  <div class="footer-copy">© 2025 صيدلية الشفاء — سوريا | جميع الحقوق محفوظة</div>
-</footer>
-
-<script src="products.js"></script>
-<script src="app.js"></script>
+    <!-- استدعاء ملفات البرمجة بالترتيب الصحيح لضمان عدم حدوث أخطاء -->
+    <script href="products.js"></script>
+    <script href="app.js"></script>
 </body>
 </html>
