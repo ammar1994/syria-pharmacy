@@ -1,179 +1,157 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>صيدلية الشفاء</title>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-<link rel="stylesheet" href="style.css"/>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>صيدلية الشفاء — Syria Pharmacy</title>
+  <meta name="description" content="صيدليتك الموثوقة — أدوية، مستحضرات، منتجات العناية. توصيل سريع لكل سوريا"/>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-<div class="topbar">
-  <span><i class="fas fa-truck"></i> توصيل سريع لباب منزلك</span>
-  <span class="sep">|</span>
-  <span><i class="fas fa-clock"></i> متاح 24 ساعة</span>
-  <span class="sep">|</span>
-  <span><i class="fas fa-money-bill-wave"></i> كاش عند الاستلام</span>
-</div>
-
-<header class="header">
-  <div class="container header-inner">
+<!-- ===== NAV ===== -->
+<nav>
+  <div class="nav-inner">
     <div class="logo">
-      <div class="logo-icon">
-        <i class="fas fa-plus-circle"></i>
-      </div>
+      <div class="logo-icon">🌿</div>
       <div>
         <div class="logo-name">صيدلية الشفاء</div>
         <div class="logo-sub">Syria Pharmacy</div>
       </div>
     </div>
-    <div class="search-wrap">
-      <input type="text" id="searchInput" placeholder="ابحث عن دواء، شامبو، بامبرز..." oninput="searchProducts()"/>
-      <button onclick="searchProducts()"><i class="fas fa-search"></i></button>
+    <div class="nav-right">
+      <div class="search-pill" onclick="scrollToProducts()">
+        <span>🔍</span><span>ابحث عن دواء...</span>
+      </div>
+      <div class="cart-wrap" onclick="alert('السلة: ' + cart + ' منتج')">
+        <div class="cart-btn">🛒</div>
+        <div class="cart-count" id="cart-count">0</div>
+      </div>
     </div>
-    <div class="header-actions">
-      <a class="wa-header" href="https://wa.me/963XXXXXXXXX" target="_blank">
-        <i class="fab fa-whatsapp"></i> اطلب الآن
-      </a>
-      <a href="admin.html" class="admin-link"><i class="fas fa-user-cog"></i></a>
-    </div>
-  </div>
-</header>
-
-<nav class="nav">
-  <div class="container nav-inner">
-    <div class="nav-item active" onclick="setNav(this,'')">الكل</div>
-    <div class="nav-item" onclick="setNav(this,'أدوية')">الأدوية</div>
-    <div class="nav-item" onclick="setNav(this,'شامبو وعناية')">العناية الشخصية</div>
-    <div class="nav-item" onclick="setNav(this,'أطفال')">الأطفال والبامبرز</div>
-    <div class="nav-item" onclick="setNav(this,'مستحضرات')">المستحضرات</div>
-    <div class="nav-item" onclick="setNav(this,'مستلزمات')">المستلزمات الطبية</div>
   </div>
 </nav>
 
+<!-- ===== HERO ===== -->
 <section class="hero">
-  <div class="container hero-inner">
-    <div class="hero-text">
-      <h1>صيدليتك الموثوقة<br/><em>في كل وقت</em></h1>
-      <p>أدوية، مستحضرات، شامبو، بامبرز وكل احتياجاتك الصحية — نوصلها لباب بيتك بأسرع وقت</p>
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">⭐ الصيدلية الأولى في سوريا</div>
+      <h1>
+        صحتك أولويتنا
+        <span class="green-text">في كل لحظة</span>
+      </h1>
+      <p class="hero-p">أدوية، مستحضرات، منتجات العناية — نوصلها لباب بيتك خلال 15 دقيقة</p>
       <div class="hero-btns">
-        <a href="#products" class="btn-white">تصفح المنتجات</a>
-        <a href="https://wa.me/963XXXXXXXXX" class="btn-wa" target="_blank">
-          <i class="fab fa-whatsapp"></i> اطلب عبر واتساب
+        <button class="btn-main" onclick="scrollToProducts()">
+          تصفح المنتجات 💊
+        </button>
+        <a href="https://wa.me/963XXXXXXXXX" class="btn-outline" style="text-decoration:none">
+          📱 واتساب
         </a>
       </div>
+      <div class="checks">
+        <div class="check"><div class="check-icon">✓</div><span>توصيل مجاني +50k ل.س</span></div>
+        <div class="check"><div class="check-icon">✓</div><span>كاش عند الاستلام</span></div>
+        <div class="check"><div class="check-icon">✓</div><span>خدمة 24/7</span></div>
+      </div>
     </div>
-    <div class="hero-pills">
-      <div class="pill"><i class="fas fa-shipping-fast"></i> توصيل سريع لكل المناطق</div>
-      <div class="pill"><i class="fas fa-coins"></i> أسعار بالليرة والدولار</div>
-      <div class="pill"><i class="fas fa-hand-holding-usd"></i> دفع كاش عند الاستلام</div>
-      <div class="pill"><i class="fas fa-clock"></i> خدمة 24 ساعة / 7 أيام</div>
-      <div class="pill"><i class="fas fa-pills"></i> أكثر من 2000 منتج</div>
+    <div class="hero-visual">
+      <div class="circle-big">
+        <div class="circle-inner">🏥</div>
+        <div class="tag-float tag1">
+          <span style="font-size:20px">💊</span>
+          <div><div class="t-title">أدوية أصلية</div><div class="t-sub">2,000+ صنف</div></div>
+        </div>
+        <div class="tag-float tag2">
+          <span style="font-size:20px">🚀</span>
+          <div><div class="t-title">توصيل سريع</div><div class="t-sub">15 دقيقة</div></div>
+        </div>
+        <div class="tag-float tag3">
+          <span>خصومات تصل 25%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <svg class="hero-wave" viewBox="0 0 1440 60" preserveAspectRatio="none">
+    <path d="M0,60L1440,60L1440,0C1200,50,840,0,480,40C240,60,80,20,0,0Z" fill="#F0F4F1"/>
+  </svg>
+</section>
+
+<!-- ===== STATS ===== -->
+<section class="stats">
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-icon">📦</div><div class="stat-num">2,000+</div><div class="stat-label">منتج أصلي</div></div>
+    <div class="stat-card"><div class="stat-icon">🕐</div><div class="stat-num">24/7</div><div class="stat-label">خدمة متواصلة</div></div>
+    <div class="stat-card"><div class="stat-icon">🚀</div><div class="stat-num">15 دقيقة</div><div class="stat-label">متوسط التوصيل</div></div>
+    <div class="stat-card"><div class="stat-icon">⭐</div><div class="stat-num">10,000+</div><div class="stat-label">عميل سعيد</div></div>
+  </div>
+</section>
+
+<!-- ===== BANNERS ===== -->
+<section class="banners">
+  <div class="banners-grid">
+    <div class="banner" style="background:linear-gradient(135deg,#FF6B35,#D4380D)" onclick="filterCat(document.querySelector('[data-cat=أطفال]'),'أطفال')">
+      <div class="banner-icon">👶</div>
+      <div class="banner-title">بامبرز وأغراض الأطفال</div>
+      <div class="banner-sub">خصم يصل 20%</div>
+      <button class="banner-btn">تسوق الآن ←</button>
+    </div>
+    <div class="banner" style="background:linear-gradient(135deg,#8B5CF6,#5B21B6)" onclick="filterCat(document.querySelector('[data-cat=عناية]'),'عناية')">
+      <div class="banner-icon">✨</div>
+      <div class="banner-title">مستحضرات وعناية</div>
+      <div class="banner-sub">أكبر تشكيلة في سوريا</div>
+      <button class="banner-btn">اكتشفي ←</button>
     </div>
   </div>
 </section>
 
-<div class="container offers-wrap">
-  <div class="offer-main">
-    <div>
-      <h2>عروض اليوم</h2>
-      <p>خصومات على المستحضرات ومنتجات العناية</p>
+<!-- ===== PRODUCTS ===== -->
+<section class="products-section" id="products-section">
+  <div class="products-inner">
+    <div class="products-head">
+      <div>
+        <div class="products-title">جميع المنتجات</div>
+        <div class="products-count" id="count-label">9 منتج متاح</div>
+      </div>
+      <div class="cats">
+        <button class="cat-btn active" onclick="filterCat(this,'الكل')">الكل</button>
+        <button class="cat-btn" data-cat="أدوية" onclick="filterCat(this,'أدوية')">أدوية</button>
+        <button class="cat-btn" data-cat="عناية" onclick="filterCat(this,'عناية')">عناية</button>
+        <button class="cat-btn" data-cat="أطفال" onclick="filterCat(this,'أطفال')">أطفال</button>
+        <button class="cat-btn" data-cat="أجهزة" onclick="filterCat(this,'أجهزة')">أجهزة</button>
+      </div>
     </div>
-    <div class="offer-tag">خصم 20%</div>
+    <div class="products-grid" id="products-grid"></div>
   </div>
-  <div class="offer-side">
-    <div class="offer-mini" style="background:#00843D"><i class="fas fa-baby"></i> بامبرز وأغراض الأطفال</div>
-    <div class="offer-mini" style="background:#1565c0"><i class="fas fa-pills"></i> أدوية الأمراض المزمنة</div>
-  </div>
-</div>
+</section>
 
-<div class="container section" id="products">
-  <div class="section-head">
-    <div class="section-title">الأقسام</div>
-  </div>
-  <div class="cats-row">
-    <div class="cat active" onclick="filterCat(this,'')">
-      <div class="cat-ico green-bg"><i class="fas fa-th-large" style="color:#00843D"></i></div>
-      <span>الكل</span>
-    </div>
-    <div class="cat" onclick="filterCat(this,'أدوية')">
-      <div class="cat-ico red-bg"><i class="fas fa-capsules" style="color:#c62828"></i></div>
-      <span>الأدوية</span>
-    </div>
-    <div class="cat" onclick="filterCat(this,'شامبو وعناية')">
-      <div class="cat-ico blue-bg"><i class="fas fa-pump-soap" style="color:#1565c0"></i></div>
-      <span>شامبو وعناية</span>
-    </div>
-    <div class="cat" onclick="filterCat(this,'أطفال')">
-      <div class="cat-ico orange-bg"><i class="fas fa-baby" style="color:#e65100"></i></div>
-      <span>الأطفال</span>
-    </div>
-    <div class="cat" onclick="filterCat(this,'مستحضرات')">
-      <div class="cat-ico purple-bg"><i class="fas fa-spray-can" style="color:#6a1b9a"></i></div>
-      <span>مستحضرات</span>
-    </div>
-    <div class="cat" onclick="filterCat(this,'مستلزمات')">
-      <div class="cat-ico teal-bg"><i class="fas fa-stethoscope" style="color:#00695c"></i></div>
-      <span>مستلزمات</span>
-    </div>
-  </div>
-
-  <div class="section-head" style="margin-top:32px">
-    <div class="section-title" id="sectionLabel">جميع المنتجات</div>
-    <span id="productCountEl" style="font-size:13px;color:#6b7280;font-weight:600"></span>
-  </div>
-
-  <div class="products-grid" id="productsGrid"></div>
-  <div id="noResults" class="no-results" style="display:none">
-    <i class="fas fa-search-minus"></i>
-    <p>لا توجد نتائج مطابقة</p>
-  </div>
-</div>
-
-<div class="trust">
-  <div class="container trust-inner">
-    <div class="trust-item">
-      <div class="trust-icon"><i class="fas fa-shipping-fast"></i></div>
-      <h3>توصيل سريع</h3>
-      <p>نوصل لكل المناطق بموعد مسبق</p>
-    </div>
-    <div class="trust-item">
-      <div class="trust-icon"><i class="fas fa-shield-alt"></i></div>
-      <h3>منتجات أصلية 100%</h3>
-      <p>جميع المنتجات مضمونة وموثوقة</p>
-    </div>
-    <div class="trust-item">
-      <div class="trust-icon"><i class="fas fa-money-bill-wave"></i></div>
-      <h3>كاش عند الاستلام</h3>
-      <p>ادفع فقط عند استلام طلبك</p>
-    </div>
-    <div class="trust-item">
-      <div class="trust-icon"><i class="fas fa-headset"></i></div>
-      <h3>دعم 24 ساعة</h3>
-      <p>تواصل معنا في أي وقت عبر واتساب</p>
-    </div>
-  </div>
-</div>
-
-<section class="contact-section">
-  <div class="container" style="text-align:center;color:#fff">
-    <h2 style="font-size:28px;font-weight:900;margin-bottom:8px">تواصل معنا الآن</h2>
-    <p style="opacity:.88;margin-bottom:32px;font-size:15px">فريقنا جاهز لخدمتك — اطلب أي منتج ونوصله لباب بيتك</p>
-    <div class="contact-btns">
-      <a href="https://wa.me/963XXXXXXXXX" class="cbtn cbtn-wa" target="_blank"><i class="fab fa-whatsapp"></i> واتساب</a>
-      <a href="tel:+963XXXXXXXXX" class="cbtn cbtn-call"><i class="fas fa-phone-alt"></i> اتصال مباشر</a>
+<!-- ===== CTA ===== -->
+<section class="cta">
+  <div class="cta-inner">
+    <div style="font-size:44px">📱</div>
+    <h2>اطلب الآن عبر واتساب</h2>
+    <p>فريقنا جاهز 24/7 — أرسل قائمة أدويتك ونوصلها لبابك</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/963XXXXXXXXX" class="btn-wa" style="text-decoration:none">
+        <span style="font-size:20px">💬</span> واتساب الآن
+      </a>
+      <a href="tel:+963XXXXXXXXX" class="btn-outline" style="text-decoration:none">
+        📞 اتصل بنا
+      </a>
     </div>
   </div>
 </section>
 
-<footer>© 2025 صيدلية الشفاء — سوريا | جميع الحقوق محفوظة</footer>
-
-<a href="https://wa.me/963XXXXXXXXX" class="float-wa" target="_blank">
-  <div class="float-pulse"></div>
-  <i class="fab fa-whatsapp"></i>
-</a>
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-logo">
+    <div class="footer-icon">🌿</div>
+    <div class="footer-name">صيدلية الشفاء</div>
+  </div>
+  <div class="footer-copy">© 2025 صيدلية الشفاء — سوريا | جميع الحقوق محفوظة</div>
+</footer>
 
 <script src="products.js"></script>
 <script src="app.js"></script>
