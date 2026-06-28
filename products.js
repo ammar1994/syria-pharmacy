@@ -1,18 +1,65 @@
 const PRODUCTS = [
-  { id:1, name:"بنادول أقراص 500mg", category:"أدوية", price_syp:15000, price_usd:1.5, available:true, isNew:false, image:"" },
-  { id:2, name:"أموكسيسيلين كبسولات 500mg", category:"أدوية", price_syp:28000, price_usd:2.8, available:true, isNew:false, image:"" },
-  { id:3, name:"فيتامين C 1000mg أقراص فوارة", category:"أدوية", price_syp:32000, price_usd:3.2, available:true, isNew:true, image:"" },
-  { id:4, name:"أوميغا 3 كبسولات", category:"أدوية", price_syp:45000, price_usd:4.5, available:true, isNew:false, image:"" },
-  { id:5, name:"كريم نيفيا للوجه", category:"مستحضرات", price_syp:55000, price_usd:5.5, available:true, isNew:false, image:"" },
-  { id:6, name:"واقي الشمس SPF50", category:"مستحضرات", price_syp:78000, price_usd:7.8, available:true, isNew:true, image:"" },
-  { id:7, name:"شامبو هيد آند شولدرز 400ml", category:"شامبو وعناية", price_syp:48000, price_usd:4.8, available:true, isNew:false, image:"" },
-  { id:8, name:"بلسم بانتين للشعر التالف", category:"شامبو وعناية", price_syp:42000, price_usd:4.2, available:true, isNew:false, image:"" },
-  { id:9, name:"بامبرز نيو بيبي مقاس 3 - 72 قطعة", category:"أطفال", price_syp:125000, price_usd:12.5, available:true, isNew:false, image:"" },
-  { id:10, name:"بامبرز نيو بيبي مقاس 4 - 60 قطعة", category:"أطفال", price_syp:130000, price_usd:13, available:true, isNew:false, image:"" },
-  { id:11, name:"هاجيز مقاس 2 - 80 قطعة", category:"أطفال", price_syp:110000, price_usd:11, available:false, isNew:false, image:"" },
-  { id:12, name:"شامبو جونسون للأطفال 300ml", category:"أطفال", price_syp:35000, price_usd:3.5, available:true, isNew:false, image:"" },
-  { id:13, name:"ميزان ضغط دم رقمي", category:"مستلزمات", price_syp:350000, price_usd:35, available:true, isNew:false, image:"" },
-  { id:14, name:"جهاز قياس السكر في الدم", category:"مستلزمات", price_syp:420000, price_usd:42, available:true, isNew:false, image:"" },
-  { id:15, name:"فرشاة أسنان أورال-بي", category:"مستلزمات", price_syp:22000, price_usd:2.2, available:true, isNew:false, image:"" },
-  { id:16, name:"معقم يدين 500ml", category:"مستلزمات", price_syp:18000, price_usd:1.8, available:true, isNew:false, image:"" }
+  {
+    id: 1, name: "بامبرز الذهبي", cat: "أطفال",
+    price: 85000, usd: 5.5, old: 105000, disc: 20,
+    badge: "الأكثر مبيعاً", bc: "#FF6B35",
+    emoji: "👶", desc: "حماية فائقة لبشرة طفلك",
+    bg: "#FFFBEB,#FFF7ED", rating: 4.9, reviews: 284
+  },
+  {
+    id: 2, name: "فيتامين سي 1000", cat: "أدوية",
+    price: 45000, usd: 2.9, old: null, disc: null,
+    badge: "وصل حديثاً", bc: "#10B981",
+    emoji: "💊", desc: "تقوية المناعة يومياً",
+    bg: "#ECFDF5,#F0FDFA", rating: 4.7, reviews: 156
+  },
+  {
+    id: 3, name: "شامبو هيد آند شولدرز", cat: "عناية",
+    price: 32000, usd: 2.1, old: 40000, disc: 15,
+    badge: "عرض محدود", bc: "#8B5CF6",
+    emoji: "🧴", desc: "للتخلص من القشرة نهائياً",
+    bg: "#F5F3FF,#FAF5FF", rating: 4.6, reviews: 98
+  },
+  {
+    id: 4, name: "جهاز قياس ضغط الدم", cat: "أجهزة",
+    price: 180000, usd: 11.5, old: 220000, disc: 18,
+    badge: "عرض اليوم", bc: "#EF4444",
+    emoji: "🩺", desc: "قياس دقيق في ثوانٍ",
+    bg: "#FEF2F2,#FDF2F8", rating: 4.8, reviews: 67
+  },
+  {
+    id: 5, name: "كريم نيفيا الأساسي", cat: "عناية",
+    price: 28000, usd: 1.8, old: null, disc: null,
+    badge: null, bc: null,
+    emoji: "🫙", desc: "ترطيب عميق طوال اليوم",
+    bg: "#EFF6FF,#F0F9FF", rating: 4.5, reviews: 203
+  },
+  {
+    id: 6, name: "أوميغا 3 للقلب", cat: "أدوية",
+    price: 65000, usd: 4.2, old: 80000, disc: 19,
+    badge: "موصى به", bc: "#F59E0B",
+    emoji: "🫀", desc: "صحة القلب والأوعية الدموية",
+    bg: "#FFFBEB,#FEFCE8", rating: 4.9, reviews: 312
+  },
+  {
+    id: 7, name: "ماسك الفحم النشط", cat: "عناية",
+    price: 22000, usd: 1.4, old: 30000, disc: 27,
+    badge: "خصم كبير", bc: "#6366F1",
+    emoji: "🖤", desc: "تنقية المسام بعمق",
+    bg: "#EEF2FF,#F5F3FF", rating: 4.4, reviews: 89
+  },
+  {
+    id: 8, name: "حفاضات هاغيز", cat: "أطفال",
+    price: 75000, usd: 4.8, old: null, disc: null,
+    badge: "مميز", bc: "#EC4899",
+    emoji: "🩷", desc: "ناعمة وجافة لساعات",
+    bg: "#FDF2F8,#FEE2F0", rating: 4.7, reviews: 195
+  },
+  {
+    id: 9, name: "مقياس سكر الدم", cat: "أجهزة",
+    price: 120000, usd: 7.7, old: 150000, disc: 20,
+    badge: "الأكثر طلباً", bc: "#0EA5E9",
+    emoji: "💉", desc: "نتائج دقيقة في 5 ثوانٍ",
+    bg: "#F0F9FF,#E0F2FE", rating: 4.9, reviews: 143
+  },
 ];
