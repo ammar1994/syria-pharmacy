@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>لوحة التحكم — صيدلية الشفاء</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Tajawal', sans-serif; background: #f5f6f7; direction: rtl; }
+
+    .admin-header {
+      background: #1a8f4e;
+      color: white;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .admin-header h1 { font-size: 20px; font-weight: 800; }
+    .back-btn {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 13px;
+      text-decoration: none;
+    }
+
+    .admin-body { padding: 24px; max-width: 900px; margin: 0 auto; }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    .card h2 { font-size: 18px; font-weight: 800; margin-bottom: 16px; color: #1a1a1a; border-right: 4px solid #1a8f4e; padding-right: 12px; }
+
+    .form-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+
+    .form-group { flex: 1; min-width: 160px; display: flex; flex-direction: column; gap: 6px; }
+
+    label { font-size: 13px; font-weight: 600; color: #555; }
+
+    input, select {
+      padding: 10px 14px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, select:focus { border-color: #1a8f4e; }
+
+    .btn-add {
+      background: #1a8f4e;
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 24px;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-add:hover { background: #146b3a; }
+
+    .excel-upload {
+      border: 2px dashed #1a8f4e;
+      border-radius: 12px;
+      padding: 32px;
+      text-align: center;
+      cursor: pointer;
+      color: #1a8f4e;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .excel-upload:hover { background: #e8f5ee; }
+
+    .excel-upload input { display: none; }
+
+    .products-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    .products-table th { background: #f5f6f7; padding: 10px; text-align: right; font-size: 13px; color: #555; }
+    .products-table td { padding: 10px; border-bottom: 1px solid #f0f0f0; font-size: 14px; vertical-align: middle; }
+    .products-table tr:hover td { background: #fafafa; }
+
+    .badge-available { background: #e8f5e9; color: #2e7d32; padding: 3px 10px; border-radius: 10px; font-size: 12px; font-weight: 700; }
+    .badge-unavailable { background: #ffebee; color: #c62828; padding: 3px 10px; border-radius: 10px; font-size: 12px; font-weight: 700; }
+
+    .btn-delete { background: none; border: none; cursor: pointer; font-size: 18px; color: #e53935; }
+
+    .success-msg { background: #e8f5e9; color: #2e7d32; padding: 12px 20px; border-radius: 8px; font-weight: 600; margin-bottom: 16px; display: none; }
+
+    #uploadStatus { margin-top: 12px; font-size: 14px; color: #1a8f4e; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<div class="admin-header">
+  <h1>⚙️ لوحة التحكم</h1>
+  <a href="index.html" class="back-btn">← الموقع الرئيسي</a>
+</div>
+
+<div class="admin-body">
+
+  <!-- إضافة منتج -->
+  <div class="card">
+    <h2>إضافة منتج جديد</h2>
+    <div id="successMsg" class="success-msg">✅ تم إضافة المنتج بنجاح</div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>اسم المنتج *</label>
+        <input type="text" id="pName" placeholder="مثال: بنادول 500mg" />
+      </div>
+      <div class="form-group">
+        <label>القسم *</label>
+        <select id="pCategory">
+          <option value="أدوية">أدوية</option>
+          <option value="شامبو وعناية">شامبو وعناية</option>
+          <option value="أطفال">أطفال وبامبرز</option>
+          <option value="مستحضرات">مستحضرات</option>
+          <option value="مستلزمات">مستلزمات طبية</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>السعر بالليرة السورية *</label>
+        <input type="number" id="pSYP" placeholder="مثال: 25000" />
+      </div>
+      <div class="form-group">
+        <label>السعر بالدولار *</label>
+        <input type="number" step="0.1" id="pUSD" placeholder="مثال: 2.5" />
+      </div>
+      <div class="form-group">
+        <label>الحالة</label>
+        <select id="pAvailable">
+          <option value="true">متوفر ✅</option>
+          <option value="false">غير متوفر ❌</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>رابط صورة المنتج (اختياري)</label>
+        <input type="text" id="pImage" placeholder="https://..." />
+      </div>
+    </div>
+
+    <button class="btn-add" onclick="addProduct()">+ إضافة المنتج</button>
+  </div>
+
+  <!-- رفع Excel -->
+  <div class="card">
+    <h2>رفع قائمة أدوية من Excel</h2>
+    <div class="excel-upload" onclick="document.getElementById('excelFile').click()">
+      <div style="font-size:36px;margin-bottom:8px">📊</div>
+      <div>اضغط لرفع ملف Excel أو CSV</div>
+      <div style="font-size:12px;color:#888;margin-top:4px">الأعمدة المطلوبة: name, category, price_syp, price_usd, available</div>
+      <input type="file" id="excelFile" accept=".csv,.xlsx,.xls" onchange="uploadExcel(this)" />
+    </div>
+    <div id="uploadStatus"></div>
+  </div>
+
+  <!-- قائمة المنتجات -->
+  <div class="card">
+    <h2>المنتجات الحالية (<span id="productCount">0</span>)</h2>
+    <table class="products-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>الاسم</th>
+          <th>القسم</th>
+          <th>السعر ل.س</th>
+          <th>السعر $</th>
+          <th>الحالة</th>
+          <th>حذف</th>
+        </tr>
+      </thead>
+      <tbody id="productsTableBody"></tbody>
+    </table>
+  </div>
+
+</div>
+
+<script>
+// تحميل المنتجات من localStorage أو الافتراضية
+let adminProducts = JSON.parse(localStorage.getItem('pharmacy_products') || 'null');
+if (!adminProducts) {
+  adminProducts = [
+    { id: 1, name: "بنادول أقراص 500mg", category: "أدوية", price_syp: 15000, price_usd: 1.5, available: true, image: "" },
+    { id: 2, name: "شامبو هيد آند شولدرز", category: "شامبو وعناية", price_syp: 45000, price_usd: 4.5, available: true, image: "" },
+    { id: 3, name: "بامبرز نيو بيبي مقاس 3", category: "أطفال", price_syp: 120000, price_usd: 12, available: true, image: "" },
+  ];
+  saveProducts();
+}
+
+function saveProducts() {
+  localStorage.setItem('pharmacy_products', JSON.stringify(adminProducts));
+  renderTable();
+}
+
+function renderTable() {
+  document.getElementById('productCount').textContent = adminProducts.length;
+  document.getElementById('productsTableBody').innerHTML = adminProducts.map((p, i) => `
+    <tr>
+      <td>${i + 1}</td>
+      <td>${p.name}</td>
+      <td>${p.category}</td>
+      <td>${p.price_syp.toLocaleString()}</td>
+      <td>$${p.price_usd}</td>
+      <td><span class="${p.available ? 'badge-available' : 'badge-unavailable'}">${p.available ? 'متوفر' : 'غير متوفر'}</span></td>
+      <td><button class="btn-delete" onclick="deleteProduct(${p.id})">🗑️</button></td>
+    </tr>
+  `).join('');
+}
+
+function addProduct() {
+  const name = document.getElementById('pName').value.trim();
+  const category = document.getElementById('pCategory').value;
+  const syp = parseInt(document.getElementById('pSYP').value);
+  const usd = parseFloat(document.getElementById('pUSD').value);
+  const available = document.getElementById('pAvailable').value === 'true';
+  const image = document.getElementById('pImage').value.trim();
+
+  if (!name || !syp || !usd) {
+    alert('يرجى ملء جميع الحقول المطلوبة');
+    return;
+  }
+
+  const newId = Date.now();
+  adminProducts.push({ id: newId, name, category, price_syp: syp, price_usd: usd, available, image });
+  saveProducts();
+
+  // مسح الحقول
+  document.getElementById('pName').value = '';
+  document.getElementById('pSYP').value = '';
+  document.getElementById('pUSD').value = '';
+  document.getElementById('pImage').value = '';
+
+  const msg = document.getElementById('successMsg');
+  msg.style.display = 'block';
+  setTimeout(() => msg.style.display = 'none', 3000);
+}
+
+function deleteProduct(id) {
+  if (confirm('هل تريد حذف هذا المنتج؟')) {
+    adminProducts = adminProducts.filter(p => p.id !== id);
+    saveProducts();
+  }
+}
+
+function uploadExcel(input) {
+  const file = input.files[0];
+  if (!file) return;
+  document.getElementById('uploadStatus').textContent = `⏳ جاري معالجة الملف: ${file.name}`;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const text = e.target.result;
+    const lines = text.split('\n').filter(l => l.trim());
+    let added = 0;
+
+    for (let i = 1; i < lines.length; i++) {
+      const cols = lines[i].split(',');
+      if (cols.length < 4) continue;
+      const [name, category, price_syp, price_usd, available] = cols.map(c => c.trim().replace(/"/g, ''));
+      if (!name || !price_syp) continue;
+
+      adminProducts.push({
+        id: Date.now() + i,
+        name,
+        category: category || 'أدوية',
+        price_syp: parseInt(price_syp) || 0,
+        price_usd: parseFloat(price_usd) || 0,
+        available: available !== 'false',
+        image: ''
+      });
+      added++;
+    }
+
+    saveProducts();
+    document.getElementById('uploadStatus').textContent = `✅ تم إضافة ${added} منتج بنجاح`;
+  };
+
+  reader.readAsText(file, 'UTF-8');
+}
+
+// تهيئة
+renderTable();
+</script>
+
+</body>
+</html>
