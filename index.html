@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>صيدلية الشفاء — سوريا</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="container header-inner">
+    <div class="logo">
+      <span class="logo-icon">💊</span>
+      <span class="logo-text">صيدلية <strong>الشفاء</strong></span>
+    </div>
+    <nav class="nav">
+      <a href="#products">الأدوية</a>
+      <a href="#categories">الأقسام</a>
+      <a href="#contact">تواصل</a>
+      <a href="admin.html" class="nav-admin">لوحة التحكم</a>
+    </nav>
+    <a class="whatsapp-btn" href="https://wa.me/963XXXXXXXXX" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="20" alt="واتساب" />
+      اطلب الآن
+    </a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <h1>صيدليتك الموثوقة<br /><span>في متناول يدك</span></h1>
+      <p>أدوية، مستحضرات، شامبو، بامبرز وكل احتياجاتك الصحية — توصيل سريع لباب منزلك</p>
+      <div class="hero-btns">
+        <a href="#products" class="btn-primary">تصفح المنتجات</a>
+        <a href="https://wa.me/963XXXXXXXXX" class="btn-whatsapp" target="_blank">اطلب عبر واتساب</a>
+      </div>
+    </div>
+    <div class="hero-img">
+      <div class="hero-card">
+        <div class="hero-badge">🚚 توصيل سريع</div>
+        <div class="hero-badge">💰 أسعار بالليرة والدولار</div>
+        <div class="hero-badge">✅ كاش عند الاستلام</div>
+        <div class="hero-badge">📞 متاح 24 ساعة</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="categories" id="categories">
+  <div class="container">
+    <h2 class="section-title">الأقسام</h2>
+    <div class="categories-grid">
+      <div class="cat-card" onclick="filterCategory('أدوية')">
+        <span class="cat-icon">💊</span>
+        <span>أدوية</span>
+      </div>
+      <div class="cat-card" onclick="filterCategory('شامبو وعناية')">
+        <span class="cat-icon">🧴</span>
+        <span>شامبو وعناية</span>
+      </div>
+      <div class="cat-card" onclick="filterCategory('أطفال')">
+        <span class="cat-icon">👶</span>
+        <span>أطفال وبامبرز</span>
+      </div>
+      <div class="cat-card" onclick="filterCategory('مستحضرات')">
+        <span class="cat-icon">💄</span>
+        <span>مستحضرات</span>
+      </div>
+      <div class="cat-card" onclick="filterCategory('مستلزمات')">
+        <span class="cat-icon">🩺</span>
+        <span>مستلزمات طبية</span>
+      </div>
+      <div class="cat-card" onclick="filterCategory('')">
+        <span class="cat-icon">🔍</span>
+        <span>الكل</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEARCH -->
+<section class="search-section">
+  <div class="container">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="ابحث عن دواء أو منتج..." oninput="searchProducts()" />
+      <span class="search-icon">🔍</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="container">
+    <h2 class="section-title">منتجاتنا</h2>
+    <div class="products-grid" id="productsGrid">
+      <!-- تُملأ بـ JavaScript -->
+    </div>
+    <div id="noResults" class="no-results" style="display:none">لا توجد نتائج</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container contact-inner">
+    <h2 class="section-title">تواصل معنا</h2>
+    <div class="contact-cards">
+      <a href="https://wa.me/963XXXXXXXXX" class="contact-card whatsapp" target="_blank">
+        <span>📱</span>
+        <span>واتساب</span>
+      </a>
+      <a href="tel:+963XXXXXXXXX" class="contact-card phone">
+        <span>📞</span>
+        <span>اتصال مباشر</span>
+      </a>
+    </div>
+    <p class="contact-note">متاحون 24 ساعة — الدفع كاش عند الاستلام</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <p>© 2025 صيدلية الشفاء — سوريا</p>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/963XXXXXXXXX" class="float-whatsapp" target="_blank">
+  <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="30" alt="واتساب" />
+</a>
+
+<script src="products.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
