@@ -67,3 +67,29 @@ function scrollToProducts() {
 document.addEventListener('DOMContentLoaded', () => {
   renderProducts('الكل');
 });
+document.addEventListener("DOMContentLoaded", () => {
+    const container = document.getElementById("luxury-products-container");
+    
+    if (!container) {
+        console.error("خطأ: لم يتم العثور على حاوية المنتجات في الـ HTML!");
+        return;
+    }
+
+    // تنظيف الحاوية قبل الضخ لضمان الأداء السريع
+    container.innerHTML = "";
+
+    // بناء وحقن الكروت الفاخرة بالموقع
+    products.forEach(product => {
+        const cardHtml = `
+            <article class="luxury-card">
+                <div class="luxury-icon-box">
+                    <i class='${product.iconClass}'></i>
+                </div>
+                <span class="luxury-badge">${product.category}</span>
+                <h3 class="luxury-product-name">${product.title}</h3>
+                <p class="luxury-product-desc">${product.desc}</p>
+            </article>
+        `;
+        container.innerHTML += cardHtml;
+    });
+});
