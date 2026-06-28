@@ -1,103 +1,69 @@
-const WA = "963XXXXXXXXX";
-let currentCat = "";
+let cart = 0;
+let currentCat = 'الكل';
 
-function fmt(n){ return n.toLocaleString('ar-SY') + " ل.س"; }
+function renderProducts(cat) {
+  const list = cat === 'الكل' ? PRODUCTS : PRODUCTS.filter(p => p.cat === cat);
+  document.getElementById('count-label').textContent = list.length + ' منتج متاح';
 
-function catColor(c){
-  const m={"أدوية":"red-bg","شامبو وعناية":"blue-bg","أطفال":"orange-bg","مستحضرات":"purple-bg","مستلزمات":"teal-bg"};
-  return m[c]||"green-bg";
-}
-function catIcon(c){
-  const m={"أدوية":"fa-capsules","شامبو وعناية":"fa-pump-soap","أطفال":"fa-baby","مستحضرات":"fa-spray-can","مستلزمات":"fa-stethoscope"};
-  return m[c]||"fa-box";
-}
-
-function renderProducts(list){
-  const grid=document.getElementById("productsGrid");
-  const noR=document.getElementById("noResults");
-  const countEl=document.getElementById("productCountEl");
-  countEl.textContent=list.length+" منتج";
-  if(!list.length){grid.innerHTML="";noR.style.display="block";return;}
-  noR.style.display="none";
-  grid.innerHTML=list.map(p=>`
-    <div class="pcard">
-      <div class="pcard-img">
-        ${p.image
-          ?`<img src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'pcard-placeholder ${catColor(p.category)}\\'><i class=\\'fas ${catIcon(p.category)}\\'></i></div>'">`
-          :`<div class="pcard-placeholder ${catColor(p.category)}"><i class="fas ${catIcon(p.category)}"></i></div>`
-        }
-        ${p.isNew?'<span class="badge-new">جديد</span>':''}
+  const grid = document.getElementById('products-grid');
+  grid.innerHTML = list.map(p => `
+    <div class="card">
+      <div class="card-img" style="background: linear-gradient(135deg, ${p.bg})">
+        <span class="card-emoji">${p.emoji}</span>
+        ${p.badge ? `<div class="card-badge" style="background:${p.bc}; box-shadow:0 4px 10px ${p.bc}66">${p.badge}</div>` : ''}
+        ${p.disc ? `<div class="card-disc">-${p.disc}%</div>` : ''}
       </div>
-      <div class="pcard-body">
-        <span class="pcard-cat">${p.category}</span>
-        <div class="pcard-name">${p.name}</div>
-        <div class="pcard-prices">
-          <span class="price-syp">${fmt(p.price_syp)}</span>
-          <span class="price-usd">≈ $${p.price_usd}</span>
+      <div class="card-body">
+        <div class="stars">
+          ${'★★★★★'.split('').map(() => `<span class="star">★</span>`).join('')}
+          <span class="review-ct">${p.rating} (${p.reviews})</span>
         </div>
-        <div class="${p.available?'avail-yes':'avail-no'}">
-          <i class="fas ${p.available?'fa-check-circle':'fa-times-circle'}"></i>
-          ${p.available?'متوفر':'غير متوفر حالياً'}
+        <div class="card-name">${p.name}</div>
+        <div class="card-desc">${p.desc}</div>
+        <div class="card-foot">
+          <div>
+            <div class="price-main">${p.price.toLocaleString()} ل.س</div>
+            <div class="price-usd">≈ $${p.usd}</div>
+            ${p.old ? `<div class="price-old">${p.old.toLocaleString()}</div>` : ''}
+          </div>
+          <button class="add-btn" id="btn-${p.id}" onclick="addToCart(${p.id})">
+            <span>+</span> أضف
+          </button>
         </div>
       </div>
-      <div class="pcard-foot">
-        ${p.available
-          ?`<button class="btn-order" onclick="order('${p.name}',${p.price_syp},${p.price_usd})">
-              <i class="fab fa-whatsapp"></i> اطلب الآن
-            </button>`
-          :`<button class="btn-notify" onclick="notify('${p.name}')">
-              <i class="fas fa-bell"></i> نبّهني عند التوفر
-            </button>`
-        }
-      </div>
-    </div>`).join("");
+    </div>
+  `).join('');
 }
 
-function searchProducts(){
-  const q=document.getElementById("searchInput").value.trim().toLowerCase();
-  let list=currentCat?PRODUCTS.filter(p=>p.category===currentCat):[...PRODUCTS];
-  if(q) list=list.filter(p=>p.name.toLowerCase().includes(q)||p.category.toLowerCase().includes(q));
-  renderProducts(list);
+function filterCat(el, cat) {
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  currentCat = cat;
+  renderProducts(cat);
 }
 
-function filterCat(el,cat){
-  currentCat=cat;
-  document.querySelectorAll(".cat").forEach(c=>c.classList.remove("active"));
-  el.classList.add("active");
-  document.querySelectorAll(".nav-item").forEach(n=>{
-    n.classList.toggle("active",n.textContent.trim()===(cat||"الكل"));
-  });
-  document.getElementById("sectionLabel").textContent=cat||"جميع المنتجات";
-  document.getElementById("searchInput").value="";
-  const list=cat?PRODUCTS.filter(p=>p.category===cat):[...PRODUCTS];
-  renderProducts(list);
-  document.getElementById("products").scrollIntoView({behavior:"smooth",block:"start"});
+function addToCart(id) {
+  cart++;
+  const countEl = document.getElementById('cart-count');
+  countEl.textContent = cart;
+  countEl.classList.add('show');
+
+  const btn = document.getElementById('btn-' + id);
+  if (btn) {
+    btn.innerHTML = '<span>✓</span> أضيف!';
+    btn.classList.add('added');
+    setTimeout(() => {
+      btn.innerHTML = '<span>+</span> أضف';
+      btn.classList.remove('added');
+    }, 1200);
+  }
 }
 
-function setNav(el,cat){
-  currentCat=cat;
-  document.querySelectorAll(".nav-item").forEach(n=>n.classList.remove("active"));
-  el.classList.add("active");
-  document.querySelectorAll(".cat").forEach(c=>{
-    const label=c.querySelector("span").textContent.trim();
-    const match=(!cat&&label==="الكل")||(cat&&label===cat)||(cat==="أطفال"&&label==="الأطفال");
-    c.classList.toggle("active",match);
-  });
-  document.getElementById("sectionLabel").textContent=cat||"جميع المنتجات";
-  document.getElementById("searchInput").value="";
-  const list=cat?PRODUCTS.filter(p=>p.category===cat):[...PRODUCTS];
-  renderProducts(list);
-  document.getElementById("products").scrollIntoView({behavior:"smooth",block:"start"});
+function scrollToProducts() {
+  document.getElementById('products-section').scrollIntoView({ behavior: 'smooth' });
 }
 
-function order(name,syp,usd){
-  const msg=`مرحباً،\nأريد طلب:\n\n*${name}*\nالسعر: ${fmt(syp)} (≈ $${usd})\n\nيرجى تأكيد التوفر والتوصيل 🙏`;
-  window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`,"_blank");
-}
-
-function notify(name){
-  const msg=`مرحباً،\nأرجو إشعاري عند توفر:\n\n*${name}*\n\nشكراً 🙏`;
-  window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`,"_blank");
-}
-
-document.addEventListener("DOMContentLoaded",()=>{ renderProducts(PRODUCTS); });
+// Init
+document.addEventListener('DOMContentLoaded', () => {
+  renderProducts('الكل');
+});
